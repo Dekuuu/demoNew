@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.UsersMapper">
+    <insert id="insertUser" parameterType="com.example.demo.entity.User">
+        insert  into users(name,password) values (#{userName},#{userPassword})
+    </insert>
+
+    <update id="updateUser" parameterType="com.example.demo.entity.User">
+        update users
+        <trim prefix="set" suffixOverrides=",">
+            <if test="userName!=null and userName!=''">
+                name=#{userName},
+            </if>
+
+            <if test="userPassword!=null and userPassword!=''">
+                password=#{userPassword}
+            </if>
+        </trim>
+        where password='mkkk'
+    </update>
+</mapper>
