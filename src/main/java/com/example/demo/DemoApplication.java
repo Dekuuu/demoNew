@@ -5,6 +5,7 @@ import com.spring4all.swagger.EnableSwagger2Doc;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
@@ -20,6 +21,7 @@ import java.util.stream.Stream;
 @EnableScheduling                   //开启定时任务
 @EnableAsync                        //开启异步
 @MapperScan(value={"com.example.demo.mapper"})      //扫描mapper包
+@EnableDiscoveryClient                              //开启nacos服务客户端注册
 public class DemoApplication {
 
     public static void main(String[] args) {
