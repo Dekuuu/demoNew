@@ -6,15 +6,11 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableSwagger2Doc                  //开启swagger
@@ -104,6 +100,13 @@ public class DemoApplication {
     public static User tt(User user){
         user.setUserName("bbb");
         return user;
+    }
+
+    //    restTemplate调用其它服务要带loadBalance，否则找不到服务
+    @Bean
+    @LoadBalanced
+    public RestTemplate restTemplate(){
+        return new RestTemplate();
     }
 
 }
