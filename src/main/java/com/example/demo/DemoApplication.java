@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @SpringBootApplication
-@EnableSwagger2Doc                  //开启swagger
+//@EnableSwagger2Doc                  //开启swagger
 @EnableScheduling                   //开启定时任务
 @EnableAsync                        //开启异步
 @MapperScan(value={"com.example.demo.mapper"})      //扫描mapper包

@@ -4,7 +4,7 @@ springfox:
       v2:
         path: /api-docs
 server:
-  port: 9080
+  port: 9082
 
 #   mybatis_config
 mybatis:
@@ -13,33 +13,45 @@ mybatis:
   #datasource
 spring:
   application:
-    name: demo-service
+    name: demo-service-gateway
   cloud:
     nacos:
       discovery:
         server-addr: 192.168.229.135:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+      - id: demo-service #路由id,唯一
+        uri: lb://demo-service #负载到demo-service
+        predicates:
+          - Path=/demo-service/** #以demo-service开头的请求都负载到demo-service服务
+        filters:
+          - StripPrefix=1
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
   datasource:
-    master :
+    master:
       driverClassName: com.mysql.jdbc.Driver
       .jdbc-url: jdbc:mysql://192.168.229.130:3306/test_slave
       username: root
       password: root
       initSize: 5
       maxActive: 20
-      minIdle:  5
+      minIdle: 5
       maxWait: 5000
       testOnReturn: true
-    slave1 :
+    slave1:
       driverClassName: com.mysql.jdbc.Driver
       .jdbc-url: jdbc:mysql://192.168.229.131:3306/test_slave
       username: root
       password: root
       initSize: 5
       maxActive: 20
-      minIdle:  5
+      minIdle: 5
       maxWait: 5000
       testOnReturn: true
 
@@ -49,24 +61,24 @@ elasticsearch:
   host: 192.168.159.1:9200
     #============== kafka ===================
     # 指定kafka 代理地址，可以多个
-#  kafka:
-#    bootstrap-servers: 192.168.229.130:9092
-#    producer:
-#      retries: 0
-#      batch-size: 16384
-#      buffer-memory: 33554432
-#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-#    consumer:
-#      group-id: test1-group
-#      auto-offset-reset: earliest
-#      enable-auto-commit: true
-#      auto-commit-interval: 100
-#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-#    listener:
-#      missing-topics-fatal: false
-    #=============== provider  =======================
+    #  kafka:
+    #    bootstrap-servers: 192.168.229.130:9092
+    #    producer:
+    #      retries: 0
+    #      batch-size: 16384
+    #      buffer-memory: 33554432
+    #      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+    #      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    #    consumer:
+    #      group-id: test1-group
+    #      auto-offset-reset: earliest
+    #      enable-auto-commit: true
+    #      auto-commit-interval: 100
+    #      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    #      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    #    listener:
+    #      missing-topics-fatal: false
+  #=============== provider  =======================
 
 #    spring.kafka.producer.retries=0
 #    # 每次批量发送消息的数量
