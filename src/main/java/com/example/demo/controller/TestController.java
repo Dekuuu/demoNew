@@ -4,11 +4,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.demo.testservice.TestService;
 import com.example.demo.annotation.TestAnnotation;
 import com.example.demo.entity.User;
+import com.example.demo.testservice.ThreadService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 @RestController
 @RequestMapping(value = "/testController/")
@@ -19,6 +22,9 @@ public class TestController {
     private TestService testServiceImpl;
     @Autowired
     private KafkaTemplate<String,Object> kafkaTemplate;
+
+    @Resource
+    private ThreadService threadService;
 
     @ApiOperation(value = "测试方法一")
     @GetMapping(value = "test")
@@ -73,6 +79,13 @@ public class TestController {
     @GetMapping(value = "insertTest")
     public String test8(){
         testServiceImpl.insertTest();
+        return "";
+    }
+
+    @ApiOperation(value = "线程测试")
+    @GetMapping(value = "thread")
+    public String thread(){
+        threadService.MultiThread();
         return "";
     }
 }
