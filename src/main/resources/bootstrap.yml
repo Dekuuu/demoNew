@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: demo-service
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.229.135:8848
+        file-extension: yml
+        namespace: d6b67fc2-2e2f-4ba2-97cd-75d6f4fa8b2a
+        group: PROD
+#        公共文件配置
+        extension-configs:
+          - data-id : application.yml
+            group : dev
+            refresh : true
+  profiles:
+    active: prod

@@ -13,7 +13,11 @@ mybatis:
   #datasource
 spring:
   application:
-    name: test-service
+    name: demo-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.229.135:8848
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
