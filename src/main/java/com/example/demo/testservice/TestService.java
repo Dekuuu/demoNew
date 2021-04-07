@@ -4,6 +4,7 @@ import com.example.demo.entity.CronConfig;
 import com.example.demo.entity.User;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 测试业务层
@@ -43,4 +44,22 @@ public interface TestService {
     public List<String> queryTestAll();
 
     public int insertTest();
+
+    /**
+     * 功能描述: 创建JWT认证<br>
+     * @Param: []
+     * @Return: java.lang.String
+     * @Author: wwg
+     * @Date: 2021-04-07 17:19
+     */
+    String createJWT(String userName,String pwd);
+
+    /**
+     * 功能描述: 解析token<br>
+     * @Param: [token]
+     * @Return: java.util.Map<java.lang.String,java.lang.String>
+     * @Author: wwg
+     * @Date: 2021-04-07 17:29
+     */
+    Map<String,String> parseJWT(String token);
 }
