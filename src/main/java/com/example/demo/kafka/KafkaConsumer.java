@@ -13,14 +13,16 @@ import springfox.documentation.spring.web.json.Json;
 /**
  *接受消息队列信息
  */
-//@Component
+@Component
 public class KafkaConsumer {
     @Autowired
     private TestService testServiceImpl;
 
     @KafkaListener(topics = "demo1")
     public void listen(ConsumerRecord<?,?> record){
-        System.out.println("接收到topic："+record.topic()+" offset："+record.offset()+" value："+record.value());
+        System.out.println("接收到topic："+record.topic()+
+                " partrition"+record.partition() +
+                " offset："+record.offset()+" value："+record.value());
     }
 
     @KafkaListener(topics = "demo2")
