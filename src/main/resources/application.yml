@@ -22,27 +22,27 @@ spring:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
   datasource:
-    master:
-      driverClassName: com.mysql.jdbc.Driver
-      .jdbc-url: jdbc:mysql://192.168.229.130:3306/test_slave
-      username: root
-      password: root
-      initSize: 5
-      maxActive: 20
-      minIdle: 5
-      maxWait: 5000
-      testOnReturn: true
-    slave1:
-      driverClassName: com.mysql.jdbc.Driver
-      .jdbc-url: jdbc:mysql://192.168.229.131:3306/test_slave
-      username: root
-      password: root
-      initSize: 5
-      maxActive: 20
-      minIdle: 5
-      maxWait: 5000
-      testOnReturn: true
-    #============== kafka ===================
+    driverClassName: com.mysql.jdbc.Driver
+    .jdbc-url: jdbc:mysql://127.0.0.1:3306/wwg
+    username: root
+    password: root
+    initSize: 5
+    maxActive: 20
+    minIdle: 5
+    maxWait: 5000
+    testOnReturn: true
+    type: com.alibaba.druid.pool.DruidDataSource
+#    slave1:
+#      driverClassName: com.mysql.jdbc.Driver
+#      .jdbc-url: jdbc:mysql://192.168.229.131:3306/test_slave
+#      username: root
+#      password: root
+#      initSize: 5
+#      maxActive: 20
+#      minIdle: 5
+#      maxWait: 5000
+#      testOnReturn: true
+    #============== kafka ==================
   # 指定kafka 代理地址，可以多个
   kafka:
     bootstrap-servers: 192.168.229.135:9092
@@ -65,8 +65,12 @@ spring:
 elasticsearch:
   user:
   password:
-  host: 192.168.159.1:9200
+  host: 127.0.0.1:9200
 
+
+feign:
+  hystrix:
+    enabled: true
 #  =============== provider  =======================
 #
 #  spring.kafka.producer.retries=0
