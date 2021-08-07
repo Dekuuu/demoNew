@@ -7,7 +7,8 @@ public enum ResultEnum {
     SUCCESS(200,"请求成功"),
     NOT_ACCESS(403,"无权限"),
     INTERNAL_ERROR(503,"系统异常"),
-    NOT_EXIST(404,"路径不存在");
+    NOT_EXIST(404,"路径不存在"),
+    BUSSINESS_ERROR(504,"业务异常");
 
     private Integer code;
     private String message;

@@ -1,7 +1,6 @@
 package com.example.demo.config;
 
 import com.example.demo.Enum.ResultEnum;
-import com.example.demo.result.ResultEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -14,12 +13,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = RuntimeException.class)
-    public ResultEntity customizeException(){
-        return ResultEntity.fail(ResultEnum.INTERNAL_ERROR);
+    public ResultData customizeException(RuntimeException runtimeException){
+        return ResultData.fail(ResultEnum.BUSSINESS_ERROR.getCode(),runtimeException.getMessage());
     }
 
     @ExceptionHandler(value = Exception.class)
-    public ResultEntity defaultException(){
-        return ResultEntity.fail(ResultEnum.NOT_ACCESS);
+    public ResultData defaultException(Exception exception){
+        return ResultData.fail(ResultEnum.INTERNAL_ERROR.getCode(),exception.getMessage());
     }
 }
