@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.demo.entity.UserSingleInstance;
 import com.example.demo.testservice.TestService;
 import com.example.demo.annotation.TestAnnotation;
 import com.example.demo.entity.User;
@@ -86,6 +87,13 @@ public class TestController {
     @GetMapping(value = "thread")
     public String thread(){
         threadService.MultiThread();
+        return "";
+    }
+
+    @ApiOperation(value = "获取单例")
+    @GetMapping(value = "getSingle")
+    public String getSingle(){
+        UserSingleInstance userSingleInstance = UserSingleInstance.getInstance();
         return "";
     }
 }

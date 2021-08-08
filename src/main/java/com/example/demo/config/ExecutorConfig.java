@@ -3,11 +3,10 @@ package com.example.demo.config;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.*;
 
 /**
  * 线程池配置
@@ -16,25 +15,37 @@ import java.util.concurrent.ThreadPoolExecutor;
 @EnableAsync
 @Log4j2
 public class ExecutorConfig {
+    /**
+     * 核心线程数量
+     */
+    public static final int CORE_POOL_SIZE = 5;
+
+    /**
+     * 最大线程数量
+     */
+//    private final int MAX_POOL_SIZE = 10;
+    public static final int MAX_POOL_SIZE = 6;
+
+    /**
+     * 超过核心线程数量的线程的最大空闲时间
+     */
+    public static final int KEEP_ALIVE_TIME = 2;
+
+    /**
+     * 等待队列，有无界队列LinkedBlockingDeque和有界队列ArrayBlockingDeque
+     */
+    private BlockingDeque<Runnable> workingQueue = new LinkedBlockingDeque<>(2);
 
     @Bean
-    public Executor asyncServiceExecutor() {
-        log.info("start asyncServiceExecutor");
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        //配置核心线程数
-        executor.setCorePoolSize(5);
-        //配置最大线程数
-        executor.setMaxPoolSize(10);
-        //配置队列大小
-        executor.setQueueCapacity(99999);
-        //配置线程池中的线程的名称前缀
-        executor.setThreadNamePrefix("async-service-");
-
-        // rejection-policy：当pool已经达到max size的时候，如何处理新任务
-        // CALLER_RUNS：不在新线程中执行任务，而是有调用者所在的线程来执行
-        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
-        //执行初始化
-        executor.initialize();
-        return executor;
+    @Primary
+    public ThreadPoolExecutor asyncServiceExecutor() {
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
+                CORE_POOL_SIZE,
+                MAX_POOL_SIZE,
+                KEEP_ALIVE_TIME,
+                TimeUnit.SECONDS,
+                workingQueue,
+                new ThreadPoolExecutor.DiscardOldestPolicy());
+        return threadPoolExecutor;
     }
 }
