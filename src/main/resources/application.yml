@@ -17,13 +17,13 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.229.135:8848
+        server-addr: 172.25.21.29:30848
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    .jdbc-url: jdbc:mysql://127.0.0.1:3306/wwg
+    .jdbc-url: jdbc:mysql://172.25.21.29:3306/testw
     username: root
     password: root
     initSize: 5
@@ -45,7 +45,7 @@ spring:
     #============== kafka ==================
   # 指定kafka 代理地址，可以多个
   kafka:
-    bootstrap-servers: 192.168.229.135:9092
+    bootstrap-servers: 172.25.21.29:9092
     producer:
       retries: 0
       batch-size: 16384
@@ -65,7 +65,7 @@ spring:
 elasticsearch:
   user:
   password:
-  host: 127.0.0.1:9200
+  host: 172.25.22.60:9200
 
 
 feign:
