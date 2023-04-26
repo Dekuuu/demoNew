@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class KafkaConsumer {
-    @Autowired
-    private TestService testServiceImpl;
+//    @Autowired
+//    private TestService testServiceImpl;
 
     @KafkaListener(topics = "demo1")
     public void listen(ConsumerRecord<?,?> record){
@@ -23,19 +23,9 @@ public class KafkaConsumer {
                 " offset："+record.offset()+" value："+record.value());
     }
 
-    @KafkaListener(topics = "demo2")
-    public void listen2(ConsumerRecord<?,?> record){
-        //offset从0开始数，可以起到一个限流的效果
-        testServiceImpl.testKafka(record.offset());
-    }
-
-    @KafkaListener(topics = "mysqlSkr")
-    public void listen3(ConsumerRecord<?, String> record){
-        testServiceImpl.insertUser(JSONObject.parseObject(record.value(),User.class));
-    }
-
-    @KafkaListener(topics = "mysqlSkrUpdate")
-    public void listen4(ConsumerRecord<?, String> record){
-        testServiceImpl.updateUser(JSONObject.parseObject(record.value(),User.class));
-    }
+//    @KafkaListener(topics = "demo2")
+//    public void listen2(ConsumerRecord<?,?> record){
+//        //offset从0开始数，可以起到一个限流的效果
+//        testServiceImpl.testKafka(record.offset());
+//    }
 }
