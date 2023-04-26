@@ -7,6 +7,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.demo.config.AppConstants;
+import com.example.demo.testservice.DemoProviderService;
 import com.example.demo.testservice.TestService;
 import com.example.demo.entity.User;
 import com.example.demo.mapper.UsersMapper;
@@ -29,6 +30,9 @@ public class TestServiceImpl implements TestService {
 
     @Autowired
     private RedisTemplate<String,String> redisTemplate;
+
+    @Autowired
+    private DemoProviderService demoProviderService;
 
 //    不建议采取这种方式写定时任务，无法动态修改执行时间、是否执行定时任务
     @Override
@@ -97,9 +101,10 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
-    public String redisTest() {
+    public String redisTest() throws Exception{
         redisTemplate.opsForValue().set("test","value1",60, TimeUnit.SECONDS);
-
+        String myName = demoProviderService.getMyName();
+        log.info("get msg from demo-provider : {}", myName);
         return redisTemplate.opsForValue().get("test");
     }
 }

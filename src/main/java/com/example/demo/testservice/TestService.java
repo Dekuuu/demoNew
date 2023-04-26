@@ -54,5 +54,5 @@ public interface TestService {
      */
     Map<String,String> parseJWT(String token);
 
-    String redisTest();
+    String redisTest() throws Exception;
 }

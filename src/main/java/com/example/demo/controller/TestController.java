@@ -75,7 +75,7 @@ public class TestController {
 
     @ApiOperation(value = "测试redis")
     @GetMapping(value = "redis")
-    public String redisTest(){
+    public String redisTest() throws Exception{
         return testServiceImpl.redisTest();
     }
 }

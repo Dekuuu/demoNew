@@ -2,7 +2,6 @@ package com.example.demo.entity.result;
 
 import com.example.demo.Enum.ResultEnum;
 import lombok.Data;
-import org.joda.time.DateTime;
 
 @Data
 public class ResultData<T> {
@@ -10,11 +9,11 @@ public class ResultData<T> {
     private int status;
     private String message;
     private T data;
-    private String timestamp ;
+    private Long timestamp ;
 
 
     public ResultData (){
-        this.timestamp = new DateTime(System.currentTimeMillis()).toString();
+        this.timestamp = System.currentTimeMillis();
     }
 
 
