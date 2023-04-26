@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.example.demo.entity.result;
 
 import com.example.demo.Enum.ResultEnum;
 import lombok.Data;

@@ -36,15 +36,6 @@ public interface TestService {
      */
     public void updateUser(User user);
 
-    public String querySwitchByKey(String key);
-
-    public String queryCronTimeByKey(String key);
-
-
-    public List<String> queryTestAll();
-
-    public int insertTest();
-
     /**
      * 功能描述: 创建JWT认证<br>
      * @Param: []
@@ -62,4 +53,6 @@ public interface TestService {
      * @Date: 2021-04-07 17:29
      */
     Map<String,String> parseJWT(String token);
+
+    String redisTest();
 }

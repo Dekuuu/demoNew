@@ -4,14 +4,12 @@ spring:
   cloud:
     nacos:
       config:
-        server-addr: 172.25.21.29:30848
-        file-extension: yml
-        namespace: d6b67fc2-2e2f-4ba2-97cd-75d6f4fa8b2a
-        group: PROD
+        server-addr: 127.0.0.1:8848
+        file-extension: properties
+        namespace: 6d7ab29c-7da9-488c-a319-0f4219de7b1c
+        group: dev
 #        公共文件配置
         extension-configs:
-          - data-id : application.yml
+          - data-id : application.properties
             group : dev
             refresh : true
-  profiles:
-    active: prod

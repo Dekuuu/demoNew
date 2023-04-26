@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.example.demo.config.mysql;
 
 import com.example.demo.Enum.DBTypeEnum;
 import com.example.demo.entity.MyRoutingDataSource;

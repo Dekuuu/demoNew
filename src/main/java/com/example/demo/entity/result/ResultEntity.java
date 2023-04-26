@@ -1,4 +1,4 @@
-//package com.example.demo.result;
+//package com.example.demo.entity.result;
 //
 //import com.example.demo.Enum.ResultEnum;
 //

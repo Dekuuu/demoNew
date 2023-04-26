@@ -7,30 +7,28 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.demo.config.AppConstants;
-import com.example.demo.mapper.CronConfigMapper;
-import com.example.demo.mapper.TestMapper;
 import com.example.demo.testservice.TestService;
 import com.example.demo.entity.User;
 import com.example.demo.mapper.UsersMapper;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @Log4j2
 public class TestServiceImpl implements TestService {
     @Autowired
     private UsersMapper usersMapper;
+
     @Autowired
-    private CronConfigMapper cronConfigMapper;
-    @Autowired
-    private TestMapper testMapper;
+    private RedisTemplate<String,String> redisTemplate;
 
 //    不建议采取这种方式写定时任务，无法动态修改执行时间、是否执行定时任务
     @Override
@@ -72,27 +70,6 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
-    public String querySwitchByKey(String key) {
-        return cronConfigMapper.queryCronSwitchByKey(key);
-    }
-
-    @Override
-    public String queryCronTimeByKey(String key) {
-        return cronConfigMapper.queryCronTimeByKey(key);
-    }
-
-    @Override
-    public List<String> queryTestAll() {
-        List<String> list = testMapper.queryAll();
-        return list;
-    }
-
-    @Override
-    public int insertTest() {
-        return testMapper.insertTest();
-    }
-
-    @Override
     public String createJWT(String userName,String pwd) {
         int mins = 15 * 24 * 60 ;
         long milisSeconds = mins * 60 * 1000;
@@ -117,5 +94,12 @@ public class TestServiceImpl implements TestService {
         params.put("userId",claims.get("userId").asString());
         params.put("password",claims.get("password").asString());
         return params;
+    }
+
+    @Override
+    public String redisTest() {
+        redisTemplate.opsForValue().set("test","value1",60, TimeUnit.SECONDS);
+
+        return redisTemplate.opsForValue().get("test");
     }
 }

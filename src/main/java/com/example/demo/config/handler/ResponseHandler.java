@@ -1,7 +1,7 @@
-package com.example.demo.handler;
+package com.example.demo.config.handler;
 
 import com.alibaba.fastjson.JSON;
-import com.example.demo.config.ResultData;
+import com.example.demo.entity.result.ResultData;
 import lombok.SneakyThrows;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;

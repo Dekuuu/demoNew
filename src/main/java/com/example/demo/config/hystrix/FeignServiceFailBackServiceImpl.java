@@ -1,8 +1,8 @@
-package com.example.demo.hystrix;
+package com.example.demo.config.hystrix;
 
 import com.example.demo.entity.User;
 import com.example.demo.entity.request.UserReq;
-import com.example.demo.feign.FeignService;
+import com.example.demo.config.feign.FeignService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

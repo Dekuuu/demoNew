@@ -1,15 +1,12 @@
-package com.example.demo.feign;
+package com.example.demo.config.feign;
 
 
-import com.example.demo.annotation.TestAnnotation;
 import com.example.demo.entity.User;
 import com.example.demo.entity.request.UserReq;
-import com.example.demo.hystrix.FeignServiceFailBackServiceImpl;
-import io.swagger.annotations.ApiOperation;
+import com.example.demo.config.hystrix.FeignServiceFailBackServiceImpl;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 

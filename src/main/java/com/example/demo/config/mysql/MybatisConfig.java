@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.example.demo.config.mysql;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;

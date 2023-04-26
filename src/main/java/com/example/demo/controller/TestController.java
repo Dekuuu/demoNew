@@ -27,16 +27,6 @@ public class TestController {
     @Resource
     private ThreadService threadService;
 
-    @ApiOperation(value = "测试方法一")
-    @GetMapping(value = "test")
-    @TestAnnotation(name = "注解方法")
-    public User test1(String id){
-        User user =new User();
-        user.setUserName("阿萨德");
-        user.setUserPassword("123");
-        return user;
-    }
-
     @ApiOperation(value = "测试方法二")
     @PostMapping(value = "test2")
     public User test2(@RequestBody User user){
@@ -69,20 +59,6 @@ public class TestController {
         return "success";
     }
 
-    @ApiOperation(value = "测试kafka，连接数据库")
-    @GetMapping(value = "queryTest")
-    public String test7(){
-        testServiceImpl.queryTestAll();
-        return "";
-    }
-
-    @ApiOperation(value = "测试kafka，连接数据库")
-    @GetMapping(value = "insertTest")
-    public String test8(){
-        testServiceImpl.insertTest();
-        return "";
-    }
-
     @ApiOperation(value = "线程测试")
     @GetMapping(value = "thread")
     public String thread(){
@@ -95,5 +71,11 @@ public class TestController {
     public String getSingle(){
         UserSingleInstance userSingleInstance = UserSingleInstance.getInstance();
         return "";
+    }
+
+    @ApiOperation(value = "测试redis")
+    @GetMapping(value = "redis")
+    public String redisTest(){
+        return testServiceImpl.redisTest();
     }
 }

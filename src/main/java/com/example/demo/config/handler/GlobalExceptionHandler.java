@@ -1,6 +1,7 @@
-package com.example.demo.config;
+package com.example.demo.config.handler;
 
 import com.example.demo.Enum.ResultEnum;
+import com.example.demo.entity.result.ResultData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

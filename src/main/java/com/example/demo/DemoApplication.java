@@ -1,7 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.entity.User;
-import com.spring4all.swagger.EnableSwagger2Doc;
+
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,7 +13,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-@EnableSwagger2Doc                  //开启swagger
+//@EnableSwagger2Doc                  //开启swagger
 @EnableScheduling                   //开启定时任务
 @EnableAsync                        //开启异步
 @MapperScan(value={"com.example.demo.mapper"})      //扫描mapper包
@@ -82,10 +82,6 @@ public class DemoApplication {
         }
         String result=reverse(str);
         return result;*/
-       User u=new User();
-       u.setUserName("aaa");
-       tt(u);
-        System.out.println("名字是"+u.getUserName());
     }
 
     public static String reverse(String str){
@@ -95,11 +91,6 @@ public class DemoApplication {
             result[array.length-i-1]=array[i];
         }
         return result.toString();
-    }
-
-    public static User tt(User user){
-        user.setUserName("bbb");
-        return user;
     }
 
     //    restTemplate调用其它服务要带loadBalance，否则找不到服务
