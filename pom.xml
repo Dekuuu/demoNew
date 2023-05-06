@@ -173,6 +173,13 @@
                     <include>**/Dockerfile</include>
                 </includes>
             </resource>
+
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/CleanDocker.sh</include>
+                </includes>
+            </resource>
         </resources>
 
     </build>
