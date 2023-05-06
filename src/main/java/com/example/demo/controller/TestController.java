@@ -78,4 +78,10 @@ public class TestController {
     public String redisTest() throws Exception{
         return testServiceImpl.redisTest();
     }
+
+    @ApiOperation(value = "测试版本升级")
+    @GetMapping(value = "testUpgrade")
+    public String testUpgrade(){
+        return "upgrade";
+    }
 }
