@@ -163,6 +163,18 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+
+        <!-- 把resources下其他配置文件也打到target下，需添加以下的配置 -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <targetPath>../</targetPath>
+                <includes>
+                    <include>**/Dockerfile</include>
+                </includes>
+            </resource>
+        </resources>
+
     </build>
 
 </project>
