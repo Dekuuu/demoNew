@@ -177,7 +177,7 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>**/CleanDocker.sh</include>
+                    <include>**/*</include>
                 </includes>
             </resource>
         </resources>
