@@ -1,8 +1,8 @@
-package com.example.demo.testservice.impl;
+package com.example.demo.service.impl;
 
 import com.example.demo.entity.observer.ObserverObject;
 import com.example.demo.entity.observer.ObserverReader;
-import com.example.demo.testservice.ObserverService;
+import com.example.demo.service.ObserverService;
 import org.springframework.stereotype.Service;
 
 @Service

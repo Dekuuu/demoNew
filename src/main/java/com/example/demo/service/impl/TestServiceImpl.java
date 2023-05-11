@@ -1,4 +1,4 @@
-package com.example.demo.testservice.impl;
+package com.example.demo.service.impl;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTCreator;
@@ -7,10 +7,11 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.demo.config.AppConstants;
-import com.example.demo.testservice.DemoProviderService;
-import com.example.demo.testservice.TestService;
+import com.example.demo.service.DemoProviderService;
+import com.example.demo.service.TestService;
 import com.example.demo.entity.User;
 import com.example.demo.mapper.UsersMapper;
+import com.example.demo.service.feign.DemoProviderFeignService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -32,7 +33,7 @@ public class TestServiceImpl implements TestService {
     private RedisTemplate<String,String> redisTemplate;
 
     @Autowired
-    private DemoProviderService demoProviderService;
+    private DemoProviderFeignService demoProviderFeignService;
 
 //    不建议采取这种方式写定时任务，无法动态修改执行时间、是否执行定时任务
     @Override
@@ -103,7 +104,9 @@ public class TestServiceImpl implements TestService {
     @Override
     public String redisTest() throws Exception{
         redisTemplate.opsForValue().set("test","value1",60, TimeUnit.SECONDS);
-        String myName = demoProviderService.getMyName();
+//        可用restTemplate或者feign调用微服务，restTemplate的话则是利用到nacos的默认轮询策略，可在控制台设置权重；feign可自定义配置类设置策略，默认也是轮询，和hystrix配合更好
+//        String myName = demoProviderService.getMyName();
+        String myName = demoProviderFeignService.getMyName();
         log.info("get msg from demo-provider : {}", myName);
         return redisTemplate.opsForValue().get("test");
     }

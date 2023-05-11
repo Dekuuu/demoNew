@@ -1,8 +1,8 @@
-package com.example.demo.testservice.impl;
+package com.example.demo.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.config.AppConstants;
-import com.example.demo.testservice.DemoProviderService;
+import com.example.demo.service.DemoProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

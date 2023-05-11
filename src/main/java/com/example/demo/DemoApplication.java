@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -18,6 +19,7 @@ import org.springframework.web.client.RestTemplate;
 @EnableAsync                        //开启异步
 @MapperScan(value={"com.example.demo.mapper"})      //扫描mapper包
 @EnableDiscoveryClient                              //开启nacos服务客户端注册
+@EnableFeignClients                 //集成feign
 public class DemoApplication {
 
     public static void main(String[] args) {

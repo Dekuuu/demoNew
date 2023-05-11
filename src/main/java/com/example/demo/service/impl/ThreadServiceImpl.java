@@ -1,6 +1,6 @@
-package com.example.demo.testservice.impl;
+package com.example.demo.service.impl;
 
-import com.example.demo.testservice.ThreadService;
+import com.example.demo.service.ThreadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

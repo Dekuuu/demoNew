@@ -2,10 +2,9 @@ package com.example.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.entity.UserSingleInstance;
-import com.example.demo.testservice.TestService;
-import com.example.demo.annotation.TestAnnotation;
+import com.example.demo.service.TestService;
 import com.example.demo.entity.User;
-import com.example.demo.testservice.ThreadService;
+import com.example.demo.service.ThreadService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

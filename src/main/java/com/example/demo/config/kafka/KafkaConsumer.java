@@ -1,10 +1,6 @@
 package com.example.demo.config.kafka;
 
-import com.alibaba.fastjson.JSONObject;
-import com.example.demo.entity.User;
-import com.example.demo.testservice.TestService;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 

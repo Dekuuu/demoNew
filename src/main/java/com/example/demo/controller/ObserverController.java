@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.testservice.ObserverService;
+import com.example.demo.service.ObserverService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.RequestMapping;

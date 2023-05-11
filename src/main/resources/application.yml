@@ -91,6 +91,14 @@ spring:
 feign:
   hystrix:
     enabled: true
+# 设置hystrix的超时时间，默认是1000ms
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
 #  =============== provider  =======================
 #
 #  spring.kafka.producer.retries=0

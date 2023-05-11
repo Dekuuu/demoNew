@@ -16,19 +16,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataSourceAOP {
     @Pointcut("!@annotation(com.example.demo.annotation.Master) " +
-            "&& (execution(* com.example.demo.testservice..*.query*(..)) " +
-            "|| execution(* com.example.demo.testservice..*.get*(..)))")
+            "&& (execution(* com.example.demo.service..*.query*(..)) " +
+            "|| execution(* com.example.demo.service..*.get*(..)))")
     public void readPointcut() {
 
     }
 
     @Pointcut("@annotation(com.example.demo.annotation.Master) " +
-            "|| execution(* com.example.demo.testservice..*.insert*(..)) " +
-            "|| execution(* com.example.demo.testservice..*.add*(..)) " +
-            "|| execution(* com.example.demo.testservice..*.update*(..)) " +
-            "|| execution(* com.example.demo.testservice..*.edit*(..)) " +
-            "|| execution(* com.example.demo.testservice..*.delete*(..)) " +
-            "|| execution(* com.example.demo.testservice..*.remove*(..))")
+            "|| execution(* com.example.demo.service..*.insert*(..)) " +
+            "|| execution(* com.example.demo.service..*.add*(..)) " +
+            "|| execution(* com.example.demo.service..*.update*(..)) " +
+            "|| execution(* com.example.demo.service..*.edit*(..)) " +
+            "|| execution(* com.example.demo.service..*.delete*(..)) " +
+            "|| execution(* com.example.demo.service..*.remove*(..))")
     public void writePointcut() {
 
     }
