@@ -6,11 +6,12 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.demo.config.AppConstants;
-import com.example.demo.service.DemoProviderService;
+import com.example.demo.mapper.slave.SlaveUsersMapper;
 import com.example.demo.service.TestService;
 import com.example.demo.entity.User;
-import com.example.demo.mapper.UsersMapper;
+import com.example.demo.mapper.master.UsersMapper;
 import com.example.demo.service.feign.DemoProviderFeignService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -28,6 +30,9 @@ import java.util.concurrent.TimeUnit;
 public class TestServiceImpl implements TestService {
     @Autowired
     private UsersMapper usersMapper;
+
+    @Autowired
+    private SlaveUsersMapper slaveUsersMapper;
 
     @Autowired
     private RedisTemplate<String,String> redisTemplate;
@@ -67,6 +72,12 @@ public class TestServiceImpl implements TestService {
     @Override
     public void insertUser(User user) {
         usersMapper.insertUser(user);
+    }
+
+    @Override
+    public List<User> queryUsers() {
+        QueryWrapper<User> wrapper = new QueryWrapper<User>();
+        return slaveUsersMapper.selectList(wrapper);
     }
 
     @Override

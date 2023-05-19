@@ -1,8 +1,10 @@
 package com.example.demo.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
+@TableName(value = "users")
 public class User {
     private String userName;
     private String userPassword;

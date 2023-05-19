@@ -6,8 +6,8 @@ springfox:
 server:
   port: 9080
 
-#   mybatis_config
-mybatis:
+#   mybatis-plus_config
+mybatis-plus:
   mapper-locations: classpath:mapper/**/*.xml
 
   #datasource
@@ -17,33 +17,39 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: ${NACOS_SERVER}
+        server-addr: 1.12.219.137:31048
         namespace: 6d7ab29c-7da9-488c-a319-0f4219de7b1c
         group: dev
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
   datasource:
-    driverClassName: com.mysql.jdbc.Driver
-    .jdbc-url: jdbc:mysql://${mysql.ip}:${mysql.port}/${mysql.database}
-    username: ${mysql.user}
-    password: ${mysql.password}
-    initSize: 5
-    maxActive: 20
-    minIdle: 5
-    maxWait: 5000
-    testOnReturn: true
-    type: com.alibaba.druid.pool.DruidDataSource
-#    slave1:
-#      driverClassName: com.mysql.jdbc.Driver
-#      .jdbc-url: jdbc:mysql://192.168.229.131:3306/test_slave
-#      username: root
-#      password: root
-#      initSize: 5
-#      maxActive: 20
-#      minIdle: 5
-#      maxWait: 5000
-#      testOnReturn: true
+    dynamic:
+      primary: master
+      strict: true
+      datasource:
+        master:
+          #      多数据源时用jdbc-url，单数据源时用url
+          driverClassName: com.mysql.jdbc.Driver
+          url: jdbc:mysql://${mysql.ip}:${mysql.port}/${mysql.database}?useSSL=false
+          username: ${mysql.user}
+          password: ${mysql.password}
+          initSize: 5
+          maxActive: 20
+          minIdle: 5
+          maxWait: 5000
+          testOnReturn: true
+          type: com.alibaba.druid.pool.DruidDataSource
+        slave1:
+          driverClassName: com.mysql.jdbc.Driver
+          url: jdbc:mysql://${mysql.ip}:${mysql.port}/${mysql.database.slave}?useSSL=false
+          username: ${mysql.user}
+          password: ${mysql.password}
+          initSize: 5
+          maxActive: 20
+          minIdle: 5
+          maxWait: 5000
+          testOnReturn: true
     #============== kafka ==================
   # 指定kafka 代理地址，可以多个
   kafka:

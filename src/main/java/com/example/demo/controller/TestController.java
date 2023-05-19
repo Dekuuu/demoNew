@@ -12,6 +12,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/testController/")
@@ -46,15 +47,14 @@ public class TestController {
         return "success";
     }
 
-    @ApiOperation(value = "测试kafka，连接数据库")
-    @GetMapping(value = "testKafkaMysql")
+    @ApiOperation(value = "测试连接数据库")
+    @GetMapping(value = "testmysql")
     public String test6(){
         User user = new User();
         user.setUserName("ttt");
         user.setUserPassword("mkkk");
-        kafkaTemplate.send("mysqlSkr",JSONObject.toJSON(user).toString());
-        user.setUserName("kkp");
-        kafkaTemplate.send("mysqlSkrUpdate",JSONObject.toJSON(user).toString());
+        user.setUserName("tt");
+        testServiceImpl.insertUser(user);
         return "success";
     }
 
@@ -82,5 +82,15 @@ public class TestController {
     @GetMapping(value = "testUpgrade")
     public String testUpgrade(){
         return "upgrade";
+    }
+
+    @ApiOperation(value = "测试查询")
+    @GetMapping(value = "testQuery")
+    public String testQuery(){
+        List<User> users = testServiceImpl.queryUsers();
+        for(User user : users){
+            System.out.println(user.getUserName());
+        }
+        return "success";
     }
 }
