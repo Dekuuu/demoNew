@@ -6,13 +6,6 @@ import com.example.demo.entity.User;
 
 public interface UsersMapper extends BaseMapper<User> {
     /**
-     * 添加用户
-     * @param user
-     * @return
-     */
-    public int insertUser(User user);
-
-    /**
      * 修改用户信息
      * @param user
      * @return

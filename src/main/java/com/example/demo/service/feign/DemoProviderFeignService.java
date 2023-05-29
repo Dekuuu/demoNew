@@ -1,5 +1,6 @@
 package com.example.demo.service.feign;
 
+import com.example.demo.entity.User;
 import com.example.demo.service.feign.fallback.DemoProviderFeignFallbackServiceImpl;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
@@ -11,4 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface DemoProviderFeignService {
     @RequestMapping(value = "/test/getMyName",method = RequestMethod.GET)
     String getMyName();
+
+    @RequestMapping(value = "/test/insertUser",method = RequestMethod.POST)
+    String insertUser(User user);
 }

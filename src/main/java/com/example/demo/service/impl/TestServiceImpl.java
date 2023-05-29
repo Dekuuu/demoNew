@@ -13,6 +13,7 @@ import com.example.demo.service.TestService;
 import com.example.demo.entity.User;
 import com.example.demo.mapper.master.UsersMapper;
 import com.example.demo.service.feign.DemoProviderFeignService;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -69,9 +70,13 @@ public class TestServiceImpl implements TestService {
         }
     }
 
+    @GlobalTransactional(rollbackFor = Exception.class)
     @Override
     public void insertUser(User user) {
-        usersMapper.insertUser(user);
+        //        调用demo-provider的方法，分布式事务seata 管控全局，feign 处理异常回滚
+        demoProviderFeignService.insertUser(user);
+        int i = 1/ 0;
+        usersMapper.insert(user);
     }
 
     @Override
