@@ -178,6 +178,7 @@
 <!--            <optional>true</optional>-->
 <!--        </dependency>-->
 
+        <!-- 整合seata-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
