@@ -75,7 +75,6 @@ public class TestServiceImpl implements TestService {
     public void insertUser(User user) {
         //        调用demo-provider的方法，分布式事务seata 管控全局，feign 处理异常回滚
         demoProviderFeignService.insertUser(user);
-        int i = 1/ 0;
         usersMapper.insert(user);
     }
 
