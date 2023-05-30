@@ -7,6 +7,7 @@ import com.example.demo.entity.User;
 import com.example.demo.service.ThreadService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -35,8 +36,9 @@ public class TestController {
 
     @ApiOperation(value = "测试方法三，模拟多个请求")
     @GetMapping(value = "testKafka")
-    public String test4(String id){
-        kafkaTemplate.send("demo1",id);      //发送消息到指定的topic
+    public String test4(){
+        int id = RandomUtils.nextInt();
+        kafkaTemplate.send("demo1",id + "");      //发送消息到指定的topic
         return "success";
     }
 
