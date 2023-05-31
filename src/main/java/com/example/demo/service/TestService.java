@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.User;
+import com.example.demo.entity.bo.UserBo;
+import com.example.demo.entity.vo.UserVo;
 
 import java.util.List;
 import java.util.Map;
@@ -25,17 +26,17 @@ public interface TestService {
 
     /**
      * 添加用户
-     * @param user
+     * @param userVo
      */
-    public void insertUser(User user);
+    public void insertUser(UserVo userVo);
 
     /**
      * 修改用户
-     * @param user
+     * @param userVo
      */
-    public void updateUser(User user);
+    public void updateUser(UserVo userVo);
 
-    public List<User> queryUsers();
+    public List<UserBo> queryUsers();
 
     /**
      * 功能描述: 创建JWT认证<br>

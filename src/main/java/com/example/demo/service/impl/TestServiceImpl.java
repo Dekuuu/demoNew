@@ -8,11 +8,14 @@ import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.demo.config.AppConstants;
+import com.example.demo.entity.bo.UserBo;
+import com.example.demo.entity.vo.UserVo;
 import com.example.demo.mapper.slave.SlaveUsersMapper;
 import com.example.demo.service.TestService;
 import com.example.demo.entity.User;
 import com.example.demo.mapper.master.UsersMapper;
 import com.example.demo.service.feign.DemoProviderFeignService;
+import com.example.demo.utils.BeanCopyUtils;
 import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,20 +75,23 @@ public class TestServiceImpl implements TestService {
 
     @GlobalTransactional(rollbackFor = Exception.class)
     @Override
-    public void insertUser(User user) {
+    public void insertUser(UserVo userVo) {
         //        调用demo-provider的方法，分布式事务seata 管控全局，feign 处理异常回滚
+        User user = userVo.toEntity();
         demoProviderFeignService.insertUser(user);
         usersMapper.insert(user);
     }
 
     @Override
-    public List<User> queryUsers() {
+    public List<UserBo> queryUsers() {
         QueryWrapper<User> wrapper = new QueryWrapper<User>();
-        return slaveUsersMapper.selectList(wrapper);
+        List<User> users = slaveUsersMapper.selectList(wrapper);
+        return BeanCopyUtils.copyListProperties(users,UserBo::new);
     }
 
     @Override
-    public void updateUser(User user) {
+    public void updateUser(UserVo userVo) {
+        User user = userVo.toEntity();
         usersMapper.updateUser(user);
     }
 

@@ -2,8 +2,9 @@ package com.example.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.entity.UserSingleInstance;
+import com.example.demo.entity.bo.UserBo;
+import com.example.demo.entity.vo.UserVo;
 import com.example.demo.service.TestService;
-import com.example.demo.entity.User;
 import com.example.demo.service.ThreadService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,7 +31,7 @@ public class TestController {
 
     @ApiOperation(value = "测试方法二")
     @PostMapping(value = "test2")
-    public User test2(@RequestBody User user){
+    public UserVo test2(@RequestBody UserVo user){
         return user;
     }
 
@@ -52,7 +53,7 @@ public class TestController {
     @ApiOperation(value = "测试连接数据库")
     @GetMapping(value = "testmysql")
     public String test6(){
-        User user = new User();
+        UserVo user = new UserVo();
         user.setUserName("ttt");
         user.setUserPassword("mkkk");
         user.setUserName("tt");
@@ -89,9 +90,9 @@ public class TestController {
     @ApiOperation(value = "测试查询")
     @GetMapping(value = "testQuery")
     public String testQuery(){
-        List<User> users = testServiceImpl.queryUsers();
-        for(User user : users){
-            System.out.println(user.getUserName());
+        List<UserBo> users = testServiceImpl.queryUsers();
+        for(UserBo user : users){
+            System.out.println("username : " +  user.getUserName() + ", password : " + user.getUserPassword());
         }
         return "success";
     }
